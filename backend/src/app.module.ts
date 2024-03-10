@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { config } from 'dotenv';
+import { PostModule } from './post/post.module';
 config();
 
 @Module({
@@ -18,7 +19,7 @@ config();
       entities: [],
       synchronize: true,
     }
-  ),UserModule],
+  ),UserModule, PostModule],
   controllers: [AppController],
   providers: [AppService],
 })
