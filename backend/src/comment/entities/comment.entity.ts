@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Comment {
@@ -8,7 +8,18 @@ export class Comment {
     @Column()
     content: string;
     userId: number;
-    commentStatus: any;
+    @ManyToOne(() => CommentStatus, commentStatus => commentStatus.comments)
+    commentStatus: CommentStatus;
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     createdAt: Date;
+}
+
+@Entity()
+export class CommentStatus {
+    @PrimaryGeneratedColumn()
+    id: number;
+    @Column()
+    status: string;
+    @OneToMany(() => Comment, comment => comment.commentStatus)
+    comments: Comment[];
 }
