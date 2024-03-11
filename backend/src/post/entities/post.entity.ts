@@ -13,4 +13,16 @@ export class Post {
     content: string;
 
     comments: any[];
+    @OneToMany(() => PostStatus, postStatus => postStatus.posts)
+    status: PostStatus;
+}
+
+@Entity()
+export class PostStatus {
+    @PrimaryGeneratedColumn()
+    id: number;
+    @Column()
+    status: string;
+    @OneToMany(() => Post, post => post.status)
+    posts: Post[];
 }
