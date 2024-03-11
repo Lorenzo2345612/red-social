@@ -6,6 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { config } from 'dotenv';
 import { PostModule } from './post/post.module';
 import { CommentModule } from './comment/comment.module';
+import { PostViewModule } from './post-view/post-view.module';
 config();
 
 @Module({
@@ -20,7 +21,7 @@ config();
       entities: [],
       synchronize: true,
     }
-  ),UserModule, PostModule, CommentModule],
+  ),UserModule, PostModule, CommentModule, PostViewModule],
   controllers: [AppController],
   providers: [AppService],
 })
